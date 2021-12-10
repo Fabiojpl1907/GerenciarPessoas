@@ -6,7 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import one.digitalinnovation.fj.apiperson.enums.PhoneType;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 // anotações para a classe ser reconhecida como entidade do banco de dados
 @Entity
@@ -15,7 +21,8 @@ import javax.persistence.*;
 // usar Lombok elimina a necessidade de ficar gerando get e set
 // deixa o codigo mais enxuto e facil de dar manutenção
 
-@Data  // automaticamente insere os get e set
+// automaticamente insere os get e set
+@Data
 @Builder  // da um padrão de projeto para construção de objetos
 @AllArgsConstructor // insere os construtores
 @NoArgsConstructor
@@ -41,8 +48,5 @@ public class Phone {
     // indicar como dado obrigatorio pela api
     @Column(nullable = false)
     private String number;
-
-
-
 
 }
