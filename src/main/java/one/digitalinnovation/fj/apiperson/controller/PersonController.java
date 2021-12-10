@@ -19,8 +19,17 @@ public class PersonController {
     // mapeando uma  operação http do tipo GET
     // tudo que acessamos no browse o fazemos a partor do metodo GET
 
-    @GetMapping
-    public String getBook() {
-        return "API Test!";
-    }
+//    usado para teste incial do projeto
+//    @GetMapping
+//    public String getBook() {
+//        return "API Test!";
+//    }
+
+
+
+
 }
+
+
+
+

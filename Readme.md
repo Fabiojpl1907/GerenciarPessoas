@@ -23,7 +23,7 @@ As tecnologias Utilizadas são
 
 - [ ] Maven 3.6.3
 
-- [ ] Spring
+- [ ] Spring Framework
 
   - [ ] Depedencias
     - Spring Boot Devtools
