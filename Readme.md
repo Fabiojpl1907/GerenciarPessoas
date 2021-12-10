@@ -1,16 +1,40 @@
 **Gerenciamento de pessoas API REST Spring Boot**
 
+Projeto que visa aplicar conceitos de API REST com Spring Boot para cadastro e gerenciamento de pessoas de uma organização, e seu Deploy na nuvem (Heroku). 
+
+Apresenta comentários sobre os principais recursos de forma a permitir entendimento do que e o porque	determinados recursos chaves são utilizados naquela parte do código / configuraçao / propriedades . 
+
+Os principias temas desenvolvidos no projeto são : 
+
+- [ ] Estilo arquitetural REST;
+- [ ] Spring Boot Framework;
+- [ ] Spring Data;
+- [ ] MapStruct;
+- [ ] Spring Test;
+- [ ] Postman;
+- [ ] Sprint Test;
+- [ ] Deploy no heroku.
 
 
-Aprenda a construir do zero uma API REST com Spring Boot para cadastro e gerenciamento de pessoas de uma organização, até o Deploy na nuvem (Heroku). Pratique e veja os principais conceitos do estilo arquitetural REST envolvidos durante o desenvolvimento do projeto.
 
-Neste desafio, você irá aprender ao mesmo tempo que desenvolve algo prático para o seu portfólio! Sendo assim, você usará as seguintes ferramentas:
+As tecnologias Utilizadas são 
 
-- **Estilo arquitetural REST;**
-- **Spring Boot Framework;**
-- **Spring Data**;
-- **MapStruct**;
-- **Spring Test;**
-- **Postman;**
-- **Sprint Test;**
-- **Deploy no heroku.**
+- [ ] Java 11
+
+- [ ] Maven 3.6.3
+
+- [ ] Spring
+
+  - [ ] Depedencias
+    - Spring Boot Devtools
+    - Lombok
+    - Spring Web
+    - Spring Data JPA
+    - Spring Boot Actuator
+    - H2 Database 
+
+- [ ] Spring Boot 2.6.1
+
+- [ ] Intellij Community 2021-03
+
+  
