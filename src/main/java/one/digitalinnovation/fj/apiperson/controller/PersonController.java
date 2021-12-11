@@ -1,8 +1,56 @@
 package one.digitalinnovation.fj.apiperson.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import one.digitalinnovation.fj.apiperson.dto.response.MessageResponseDTO;
+import one.digitalinnovation.fj.apiperson.entity.Person;
+import one.digitalinnovation.fj.apiperson.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+// Intelij -> Shif + Option + Cmd + L  para reordenar arquivo
+
+// Versão 2 ( versão 1 esta ao final da versão 2 com todos seus comentá rios )
+// Controler é só um ponto de incio da API
+// não tem lógica em colocar regras de negócio dentro dele
+
+// ao criar a classe service fizemoa o desacoplamento
+// e definimos responsabilodades unicas para cada uma das classes
+
+@RestController
+@RequestMapping("/api/v1/people")
+
+
+public class PersonController {
+
+    // injecao de dependencia da classe person service
+    private PersonService personService;
+
+    @Autowired
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)  // para retornar codigo 201
+    public MessageResponseDTO createPerson(@RequestBody Person person) {
+        return personService.createPerson(person);
+
+    }
+
+
+}
+
+// versão 1
+/*
+import lombok.AllArgsConstructor;
+import one.digitalinnovation.fj.apiperson.dto.response.MessageResponseDTO;
+import one.digitalinnovation.fj.apiperson.entity.Person;
+import one.digitalinnovation.fj.apiperson.repository.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+
+
 
 // controlador que sera acessao a partir de uma API REST
 @RestController
@@ -14,10 +62,11 @@ import org.springframework.web.bind.annotation.RestController;
 // sempre versionar a api
 @RequestMapping("/api/v1/people")
 
+
 public class PersonController {
 
     // mapeando uma  operação http do tipo GET
-    // tudo que acessamos no browse o fazemos a partor do metodo GET
+    // tudo que acessamos no browse o fazemos a partir do metodo GET
 
 //    usado para teste incial do projeto
 //    @GetMapping
@@ -26,9 +75,47 @@ public class PersonController {
 //    }
 
 
+    // injetar a interface PersonRepository
+    private PersonRepository personRepository;
+
+    // Injeção de dependencias pelo Spring
+    // e criaçãO DO Construtor
+    // Inversão de controle : O Spring é quem vai instanciar todos os objetos tipo repository
+    // vai gerenciar todo o ciclo de vida
+
+
+    // Spring injete uma implementação do tipo repositorio aqui para dentro
+    // somente o contrato personrepository
+    // a vantagem de injetar dentro do construtor é que facilita a construção
+    // de teste unitarios futuramente
+
+    @Autowired
+    public PersonController(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
+    // informar que dados vem de uma requisição - RequestBody
+    // builder permite fazer de uma forma mais encapsulada
+    // o tratamento dos dados de entrada
+    // O Lombok vai criar automaicamente uma classe message.builder
+    // e com base nos atributos vai criar todos metodos para preencher os dados
+    // muito util na criação de metodos unitários
+
+    // metodo Post de REST
+    @PostMapping
+    public MessageResponseDTO createPerson(@RequestBody Person person) {
+        Person savedPerson = personRepository.save(person);
+        return MessageResponseDTO.builder().message("Pessoa criada com ID : " + savedPerson.getId()).build();
+
+    }
+
+
+
 
 
 }
+*/
+
 
 
 
