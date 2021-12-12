@@ -1,11 +1,15 @@
 package one.digitalinnovation.fj.apiperson.controller;
 
+import one.digitalinnovation.fj.apiperson.dto.request.PersonDTO;
 import one.digitalinnovation.fj.apiperson.dto.response.MessageResponseDTO;
 import one.digitalinnovation.fj.apiperson.entity.Person;
 import one.digitalinnovation.fj.apiperson.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 // Intelij -> Shif + Option + Cmd + L  para reordenar arquivo
 
@@ -32,11 +36,14 @@ public class PersonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)  // para retornar codigo 201
-    public MessageResponseDTO createPerson(@RequestBody Person person) {
-        return personService.createPerson(person);
+    public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO) {
+        return personService.createPerson(personDTO);
 
     }
 
+    public List<PersonDTO> listAll() {
+        return personService.lastAll();
+    }
 
 }
 
