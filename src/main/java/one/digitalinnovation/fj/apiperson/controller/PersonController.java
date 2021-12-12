@@ -3,6 +3,7 @@ package one.digitalinnovation.fj.apiperson.controller;
 import one.digitalinnovation.fj.apiperson.dto.request.PersonDTO;
 import one.digitalinnovation.fj.apiperson.dto.response.MessageResponseDTO;
 import one.digitalinnovation.fj.apiperson.entity.Person;
+import one.digitalinnovation.fj.apiperson.exception.PersonNotFoundException;
 import one.digitalinnovation.fj.apiperson.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,11 +41,23 @@ public class PersonController {
         return personService.createPerson(personDTO);
 
     }
-
+    @GetMapping
     public List<PersonDTO> listAll() {
         return personService.lastAll();
     }
 
+    // Get para pegar uma pessoa especifica no Banco de Dados
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
+        return personService.findById(id);
+    }
+
+    // delete -  apagar uma pessoa
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) throws PersonNotFoundException {
+        personService.delete(id);
+    }
 }
 
 // versão 1

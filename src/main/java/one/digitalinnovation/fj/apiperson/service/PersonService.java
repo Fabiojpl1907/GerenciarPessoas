@@ -4,12 +4,14 @@ package one.digitalinnovation.fj.apiperson.service;
 import one.digitalinnovation.fj.apiperson.dto.request.PersonDTO;
 import one.digitalinnovation.fj.apiperson.dto.response.MessageResponseDTO;
 import one.digitalinnovation.fj.apiperson.entity.Person;
+import one.digitalinnovation.fj.apiperson.exception.PersonNotFoundException;
 import one.digitalinnovation.fj.apiperson.mapper.PersonMapper;
 import one.digitalinnovation.fj.apiperson.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -48,11 +50,33 @@ public class PersonService {
         // metodo para listar todo mundo
         List<Person> allPeople = personRepository.findAll();
 
-        // converter o obbjeto allPeple em um objeto PersonDTO
+        // converter o objeto allPeple em um objeto PersonDTO
         // chamar a api stream() usada para transformação e manipulação de listas
         // map() mapeia daca um dos registr de allPeople
-
-
         return allPeople.stream().map(personMapper::toDTO).collect(Collectors.toList());
     }
+
+
+    // diferença entre melhoria e refatorar
+    // para refator devo ter teste unitario para garantor que
+    // ao alterar o codigo , não quebrei a aplicação
+    public PersonDTO findById(Long id) throws PersonNotFoundException  {
+        Person person = verifyIfExists(id);
+        return personMapper.toDTO( person );
+    }
+
+    public void delete(Long id) throws PersonNotFoundException  {
+            verifyIfExists(id);
+            personRepository.deleteById(id);
+    }
+
+    // codigo repetido em findById e Delete
+    // foi extraido via refactor e criado um metodo
+    private Person verifyIfExists(Long id) throws PersonNotFoundException {
+        return personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
+    }
+
+
+
 }
