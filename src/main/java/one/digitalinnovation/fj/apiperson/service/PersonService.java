@@ -34,16 +34,11 @@ public class PersonService {
 
     public MessageResponseDTO createPerson(PersonDTO personDTO) {
         Person personToSave = personMapper.toModel(personDTO);
-
         // convertar todo DTO em uma unica entidade
         Person savedPerson = personRepository.save(personToSave);
-
-        return MessageResponseDTO
-                .builder()
-                .message("Pessoa criada com ID : " + savedPerson.getId())
-                .build();
-
+        return createMessageResponse(savedPerson.getId(), "Created person with ID ");
     }
+
 
     // metodo para listar todas as pessoas
     public List<PersonDTO> lastAll() {
@@ -78,5 +73,18 @@ public class PersonService {
     }
 
 
+    // pareceido com criar pessoa
+    public MessageResponseDTO updateById(Long id, PersonDTO personDTO) throws PersonNotFoundException {
+        verifyIfExists(id);
+        Person personToUpdate = personMapper.toModel(personDTO);
+        Person updatedPerson = personRepository.save(personToUpdate);
+        return createMessageResponse(updatedPerson.getId(), "Updated person with ID ");
+    }
 
+    private MessageResponseDTO createMessageResponse(Long id, String message) {
+        return MessageResponseDTO
+                .builder()
+                .message(message + id)
+                .build();
+    }
 }

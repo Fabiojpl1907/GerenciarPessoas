@@ -35,12 +35,14 @@ public class PersonController {
         this.personService = personService;
     }
 
+
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)  // para retornar codigo 201
+    @ResponseStatus(HttpStatus.CREATED)
     public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO) {
         return personService.createPerson(personDTO);
-
     }
+
+
     @GetMapping
     public List<PersonDTO> listAll() {
         return personService.lastAll();
@@ -57,6 +59,15 @@ public class PersonController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) throws PersonNotFoundException {
         personService.delete(id);
+    }
+
+    // criar metodo PUt
+    // @PathVariable para mapear no http o id da variavel
+    // @RequestBody - passar o corpo da requisicao
+    // @Valid  - pega mapeamento feito na person DTO
+    @PutMapping("/{id}")
+    public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody @Valid PersonDTO personDTO) throws PersonNotFoundException {
+        return personService.updateById(id, personDTO);
     }
 }
 
