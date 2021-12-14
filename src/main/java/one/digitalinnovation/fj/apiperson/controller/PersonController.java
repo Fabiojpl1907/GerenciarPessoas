@@ -1,5 +1,6 @@
 package one.digitalinnovation.fj.apiperson.controller;
 
+import lombok.AllArgsConstructor;
 import one.digitalinnovation.fj.apiperson.dto.request.PersonDTO;
 import one.digitalinnovation.fj.apiperson.dto.response.MessageResponseDTO;
 import one.digitalinnovation.fj.apiperson.entity.Person;
@@ -23,17 +24,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/people")
-
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 
 public class PersonController {
 
     // injecao de dependencia da classe person service
     private PersonService personService;
 
-    @Autowired
+    // Substituido por @AllArgs....
+/*    @Autowired
     public PersonController(PersonService personService) {
         this.personService = personService;
-    }
+    }*/
 
 
     @PostMapping

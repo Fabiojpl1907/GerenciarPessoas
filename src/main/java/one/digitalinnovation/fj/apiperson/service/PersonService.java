@@ -1,6 +1,7 @@
 package one.digitalinnovation.fj.apiperson.service;
 
 
+import lombok.AllArgsConstructor;
 import one.digitalinnovation.fj.apiperson.dto.request.PersonDTO;
 import one.digitalinnovation.fj.apiperson.dto.response.MessageResponseDTO;
 import one.digitalinnovation.fj.apiperson.entity.Person;
@@ -19,17 +20,20 @@ import java.util.stream.Collectors;
 // regras de negocio de nossa aplicação
 
 @Service
-
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonService {
 
     private PersonRepository personRepository;
 
     private final PersonMapper personMapper = PersonMapper.INSTANCE;
 
+    // Substituido por @AllArgs....
+/*
     @Autowired
     public PersonService(PersonRepository personRepository){
         this.personRepository = personRepository;
     }
+*/
 
 
     public MessageResponseDTO createPerson(PersonDTO personDTO) {
