@@ -14,12 +14,15 @@ Os principias temas desenvolvidos no projeto são :
 - [ ] Postman;
 - [ ] Sprint Test;
 - [ ] Deploy no heroku.
+- [ ] Boas Praticas de construção de codigo 
+- [ ] Boas praticas de Teste
+- [ ] Boas Praticas de qualidade - Pull Request 
 
 
 
 As tecnologias Utilizadas são 
 
-- [ ] Java 11
+- [ ] Java 15
 
 - [ ] Maven 3.6.3
 
